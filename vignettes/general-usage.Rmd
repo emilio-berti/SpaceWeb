@@ -48,3 +48,10 @@ swm <- weight_ls(ls, "delauney", dist_formula = "1/x", style = "minmax", plot = 
 if (all(swm$swm == t(swm$swm))) message("minmax: symmetric")
 ```
 
+```{r local_patches}
+ts <- load_timeseries("~/Proj/remilio/data/output/remilio/1/timeseries_MI_1.out")
+webs <- local_webs(ts, fw)
+plot(webs$webs[[5]])
+image(webs$jaccard, col = (c("darkred", "tomato", "white", "skyblue", "darkblue")))
+hist(webs$properties$connectance, breaks = 10)
+```

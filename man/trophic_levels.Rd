@@ -4,12 +4,10 @@
 \alias{trophic_levels}
 \title{Calculate trophic level}
 \usage{
-trophic_levels(sp.names, metaweb)
+trophic_levels(g)
 }
 \arguments{
-\item{sp.names}{vector, names of the species in the meta-community.}
-
-\item{metaweb}{adjacency matrix of the meta food web (metaweb).}
+\item{g}{igraph object of the food web.}
 }
 \value{
 numeric vector of trophic levels.

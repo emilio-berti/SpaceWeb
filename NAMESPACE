@@ -2,7 +2,7 @@ exportPattern("^[[:alpha:]]+")
 importFrom("igraph", "graph_from_adjacency_matrix", "V", "V<-", "degree",
            "similarity", "transitivity", "membership", "modularity",
            "average.path.length", "graph.motifs", "cluster_fast_greedy",
-           "as.undirected")
+           "as.undirected", "induced_subgraph", "as_adjacency_matrix")
 importFrom("testthat", "with_reporter", "FailReporter", "expect_identical",
            "expect_equal")
 importFrom("spdep", "tri2nb", "dnearneigh", "knearneigh", "knn2nb",

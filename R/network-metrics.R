@@ -1,11 +1,10 @@
 #' @title Calculate trophic level
 #'
-#' @param sp.names vector, names of the species in the meta-community.
-#' @param metaweb adjacency matrix of the meta food web (metaweb).
+#' @param g igraph object of the food web.
 #'
 #' @return numeric vector of trophic levels.
-trophic_levels <- function(sp.names, metaweb) {
-  fw <- metaweb[sp.names, sp.names]
+trophic_levels <- function(g) {
+  fw <- as_adjacency_matrix(g, sparse = FALSE)
   fw <- t(fw)
   nn <- rowSums(fw)
   nn[nn == 0] <- 1
@@ -18,12 +17,11 @@ trophic_levels <- function(sp.names, metaweb) {
 }
 #' @title Compute network metrics
 #'
-#' @param sp.names vector, names of the species in the meta-community.
-#' @param metaweb adjacency matrix of the meta food web (metaweb).
+#' @param g igraph object of the food web.
 #'
 #' @return a data.frame with network metrics.
-network <- function(sp.names, metaweb) {
-  fw <- metaweb[sp.names, sp.names]
+network <- function(g) {
+  fw <- as_adjacency_matrix(g, sparse = FALSE)
   S <- ncol(fw) #number of species
   L <- sum(fw) #number of links
   C <- L / (S ^ 2) #connectance
@@ -42,14 +40,13 @@ network <- function(sp.names, metaweb) {
   # max. of TL
   # if empty matrix (0 size in both dimensions), or there is no basal species
   # then just create NA
-  TL <- tryCatch(trophic_levels(sp.names, metaweb),
+  TL <- tryCatch(trophic_levels(g),
                  error = function(e) rep(NA, S))
   maxTL <- max(TL)
   meanTL <- mean(TL)
   sdTL <- sd(TL)
   omn <- sum(TL %% 1 != 0) #number omnivores
   frOmn <- omn / S  #fraction of omnivores
-  g <- graph_from_adjacency_matrix(fw)
   Sim <- similarity(g, mode = "all") #Jaccard similarity
   diag(Sim) <- NA
   meanSim <- apply(Sim, 2, mean, na.rm = TRUE)

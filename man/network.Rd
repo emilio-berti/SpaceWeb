@@ -4,12 +4,10 @@
 \alias{network}
 \title{Compute network metrics}
 \usage{
-network(sp.names, metaweb)
+network(g)
 }
 \arguments{
-\item{sp.names}{vector, names of the species in the meta-community.}
-
-\item{metaweb}{adjacency matrix of the meta food web (metaweb).}
+\item{g}{igraph object of the food web.}
 }
 \value{
 a data.frame with network metrics.
