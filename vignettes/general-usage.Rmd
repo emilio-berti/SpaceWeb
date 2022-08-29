@@ -1,0 +1,50 @@
+---
+title: "General usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{General usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(SpaceWeb)
+```
+
+```{r load_data}
+fw <- load_foodweb("~/Proj/remilio/data/foodwebs/web_1.out",
+                   "~/Proj/remilio/data/foodwebs/BodyMass_1.out")
+ls <- load_landscape("~/Proj/remilio/data/landscapes/MI_1.out")
+swm <- weight_ls(ls, "delauney", dist_formula = "1/x", style = "S", plot = TRUE)
+```
+
+There are five normalization methods: _C_, _U_, _minmax_, _B_, _W_, and _S_:
+  - _C_ is globally standardized (sum over all links to unity).
+  - _U_ is equal to _C_ divided by the number of neighbors.
+  - _minmax_ normalized according to minimum/maximum of rowsums and colsums.
+  - _B_ is the basic binar coding scheme.
+  - _W_ is row standardized (sum over all links to _n_).
+  - _S_ is the variance-stabilizing scheme.
+
+```{r style_comparison}
+swm <- weight_ls(ls, "delauney", dist_formula = "1/x", style = "S", plot = TRUE)
+if (all(swm$swm == t(swm$swm))) message("S: symmetric")
+swm <- weight_ls(ls, "delauney", dist_formula = "1/x", style = "W", plot = TRUE)
+if (all(swm$swm == t(swm$swm))) message("W: symmetric")
+swm <- weight_ls(ls, "delauney", dist_formula = "1/x", style = "B", plot = TRUE)
+if (all(swm$swm == t(swm$swm))) message("B: symmetric")
+swm <- weight_ls(ls, "delauney", dist_formula = "1/x", style = "U", plot = FALSE)
+if (all(swm$swm == t(swm$swm))) message("U: symmetric")
+swm <- weight_ls(ls, "delauney", dist_formula = "1/x", style = "C", plot = FALSE)
+if (all(swm$swm == t(swm$swm))) message("C: symmetric")
+swm <- weight_ls(ls, "delauney", dist_formula = "1/x", style = "minmax", plot = FALSE)
+if (all(swm$swm == t(swm$swm))) message("minmax: symmetric")
+```
+
