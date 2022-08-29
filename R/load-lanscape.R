@@ -5,11 +5,13 @@
 #' @return a matrix with xy coordinates.
 #'
 #' @examples
+#' \dontrun{
 #' list.files("data/landscapes", full.names = TRUE)
 #' i <- 1
 #' path <- file.path("data", "landscapes")
 #' ls_file <- file.path(path, paste0("RGG_", i, ".out"))
 #' ls <- load_landscape(ls_file)
+#' }
 load_landscape <- function(ls_file) {
   # landscape type
   if (grepl("MI", ls_file)) {

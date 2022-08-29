@@ -1,7 +1,8 @@
 exportPattern("^[[:alpha:]]+")
 importFrom("igraph", "graph_from_adjacency_matrix", "V", "V<-", "degree",
            "similarity", "transitivity", "membership", "modularity",
-           "average.path.length", "graph.motifs", "cluster_fast_greedy")
+           "average.path.length", "graph.motifs", "cluster_fast_greedy",
+           "as.undirected")
 importFrom("testthat", "with_reporter", "FailReporter", "expect_identical",
            "expect_equal")
 importFrom("spdep", "tri2nb", "dnearneigh", "knearneigh", "knn2nb",
@@ -11,3 +12,4 @@ importFrom("grDevices", "adjustcolor")
 importFrom("graphics", "layout", "lines", "par", "plot.new", "points", "text")
 importFrom("stats", "loess", "sd")
 importFrom("utils", "read.csv", "read.table")
+importFrom("adespatial", "mem")

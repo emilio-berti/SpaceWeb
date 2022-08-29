@@ -6,11 +6,13 @@
 #' @return an igraph object.
 #'
 #' @examples
+#' \dontrun{
 #' i <- 1
 #' path <- file.path("data", "foodwebs")
 #' sp_file <- file.path(path, paste0("BodyMass_", i, ".out"))
 #' fw_file <- file.path(path, paste0("web_", i, ".out"))
 #' fw <- load_foodweb(fw_file, sp_file)
+#' }
 load_foodweb <- function(fw_file, sp_file) {
   sp <- read.csv(sp_file)
   # craete graph
