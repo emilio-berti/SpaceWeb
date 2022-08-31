@@ -33,7 +33,7 @@ select_mems <- function(
     d2 = d2,
     style = style,
     weights = c("flin", "fdown", "fup"),
-    nb = c("del", "gab", "rel", "mst", "dnear"),
+    nb = nb,
     y_fdown = seq(2, 5, by = 0.5),
     y_fup = seq(1, 5, by = 0.5)
   )
