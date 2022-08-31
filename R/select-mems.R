@@ -43,7 +43,7 @@ select_mems <- function(webs, landscape, output, d2 = 0.3, style = "B") {
   isBestMstree <- grepl("MST", rownames(r2)[1])
   isSecondBestAsGood <- (round(r2$R2Adj.select[1], 2) - round(r2$R2Adj.select[2], 2)) < 1e-2
   isSecondBestMstree <- grepl("MST", rownames(r2)[2])
-  if (isBestMstree & isSecondBestAsGood & !isSecondBestMstree) {
+  if (isBestMstree && isSecondBestAsGood && !isSecondBestMstree) {
     sel$best.id <- which(names(cands) == rownames(r2)[2])
     names(sel$best.id) <- rownames(r2)[2]
     sel$best <- mem.select(y, cands[[rownames(r2)[2]]])
