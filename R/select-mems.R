@@ -38,7 +38,7 @@ select_mems <- function(webs, landscape, output, d2 = 0.3, style = "B") {
   r2 <- sel$candidates[order(sel$candidates$R2Adj.select, decreasing = TRUE),
                        c("Pvalue", "R2Adj.select")]
   r2 <- r2[!is.na(r2$R2Adj.select), ]
-  write.csv(r2, paste0(output, "_selected-mems.csv"))
+  write.csv(r2, paste0(output, "selected-mems.csv"))
   # if best is mstree and second best is as good, take second best
   isBestMstree <- grepl("MST", rownames(r2)[1])
   isSecondBestAsGood <- (round(r2$R2Adj.select[1], 2) - round(r2$R2Adj.select[2], 2)) < 1e-2
@@ -61,7 +61,7 @@ select_mems <- function(webs, landscape, output, d2 = 0.3, style = "B") {
                     paste0("1 - x / ", dmax),
                     paste0("1 / (x ^ ", par, ")"),
                     paste0("1 - (x / ", dmax, ") ^ ", par))
-    pdf(paste0(output, "_best-swm.pdf"), width = 8, height = 4)
+    pdf(paste0(output, "best-swm.pdf"), width = 8, height = 4)
     lw <- weight_ls(
       landscape,
       mode = mode,
@@ -73,11 +73,11 @@ select_mems <- function(webs, landscape, output, d2 = 0.3, style = "B") {
     dev.off()
   }
   # best MEMs summary
-  write.csv(sel$best$summary, paste0(output, "_best-swm-summary.csv"))
+  write.csv(sel$best$summary, paste0(output, "best-swm-summary.csv"))
   # best MEMs table
-  write.csv(sel$best$MEM.select, paste0(output, "_best-swm-mems.csv"))
+  write.csv(sel$best$MEM.select, paste0(output, "best-swm-mems.csv"))
   # plot MEMs spatially
-  pdf(paste0(output, "_plot-mems.pdf"), width = 4, height = 4)
+  pdf(paste0(output, "plot-mems.pdf"), width = 4, height = 4)
   par(mfrow = c(2, 2))
   for (i in intersect(1:4, seq_len(ncol(sel$best$MEM.select)))) {
     s.value(landscape,
@@ -114,7 +114,7 @@ select_mems <- function(webs, landscape, output, d2 = 0.3, style = "B") {
   centr$w.pagerank <- page_rank(g)$vector
   centr$w.subgraph <- subgraph_centrality(g)
   # save to file
-  write.csv(centr, paste0(output, "_mems-centralities.csv"))
+  write.csv(centr, paste0(output, "mems-centralities.csv"))
   return(list(
     mems = sel,
     centrality = centr,
