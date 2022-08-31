@@ -4,6 +4,8 @@
 #' @param landscape a landscape, i.e. a matrix with xy coordinates.
 #' @param output string, where to write output files. Only path and file name,
 #'   with no extension.
+#' @param d2 maximum distance for dnear neighbors.
+#' @param style normalization style of the SWM.
 #'
 #' @return
 select_mems <- function(webs, landscape, output, d2 = 0.3, style = "B") {

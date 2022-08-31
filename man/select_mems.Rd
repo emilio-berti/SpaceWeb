@@ -13,6 +13,10 @@ select_mems(webs, landscape, output, d2 = 0.3, style = "B")
 
 \item{output}{string, where to write output files. Only path and file name,
 with no extension.}
+
+\item{d2}{maximum distance for dnear neighbors.}
+
+\item{style}{normalization style of the SWM.}
 }
 \description{
 Select MEMs
