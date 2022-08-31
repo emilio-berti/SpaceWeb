@@ -4,12 +4,21 @@
 \alias{select_mems}
 \title{Select MEMs}
 \usage{
-select_mems(webs, landscape, output, d2 = 0.3, style = "B")
+select_mems(
+  webs,
+  landscape,
+  nb = c("del", "gab", "rel", "mst", "dnear"),
+  output,
+  d2 = 0.3,
+  style = "B"
+)
 }
 \arguments{
 \item{webs}{list object obtained from local_web() function.}
 
 \item{landscape}{a landscape, i.e. a matrix with xy coordinates.}
+
+\item{nb}{choices of neighor graphs.}
 
 \item{output}{string, where to write output files. Only path and file name,
 with no extension.}

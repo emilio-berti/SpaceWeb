@@ -2,13 +2,21 @@
 #'
 #' @param webs list object obtained from local_web() function.
 #' @param landscape a landscape, i.e. a matrix with xy coordinates.
+#' @param nb choices of neighor graphs.
 #' @param output string, where to write output files. Only path and file name,
 #'   with no extension.
 #' @param d2 maximum distance for dnear neighbors.
 #' @param style normalization style of the SWM.
 #'
 #' @return
-select_mems <- function(webs, landscape, output, d2 = 0.3, style = "B") {
+select_mems <- function(
+    webs,
+    landscape,
+    nb = c("del", "gab", "rel", "mst", "dnear"),
+    output,
+    d2 = 0.3,
+    style = "B"
+    ) {
   # response to select MEMs
   pca <- dudi.pca(webs$properties, scannf = FALSE, nf = 2)
   if (inertia(pca)$tot.inertia[, "cum(%)"][2] < 0.7) {
