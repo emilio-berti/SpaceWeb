@@ -84,7 +84,8 @@ weight_ls <- function(
          cex = 1.5)
     plot(nb, xy,
          cex = 2.5,
-         col = "steelblue", lw = 1.5)
+         col = adjustcolor("steelblue",  alpha.f = .5),
+         lw = 1.5)
     points(xy, pch = 20, cex = 3, col = "grey20")
     text(xy[, 1], xy[, 2], seq_len(nrow(xy)), col = "gold", cex = 1)
     x <- unlist(dlist)
