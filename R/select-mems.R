@@ -4,13 +4,9 @@
 #' @param landscape a landscape, i.e. a matrix with xy coordinates.
 #' @param output string, where to write output files. Only path and file name,
 #'   with no extension.
-#' @param ... extra arguments d2 (maximum distance for dnear) and style (for
-#'   normalization style of the SWM)
 #'
 #' @return
-select_mems <- function(webs, landscape, output, ...) {
-  d2 <- match.call()
-  style <- match.call()
+select_mems <- function(webs, landscape, output, d2 = 0.3, style = "B") {
   # response to select MEMs
   pca <- dudi.pca(webs$properties, scannf = FALSE, nf = 2)
   if (inertia(pca)$tot.inertia[, "cum(%)"][2] < 0.7) {

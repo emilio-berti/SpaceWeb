@@ -4,7 +4,7 @@
 \alias{select_mems}
 \title{Select MEMs}
 \usage{
-select_mems(webs, landscape, output, ...)
+select_mems(webs, landscape, output, d2 = 0.3, style = "B")
 }
 \arguments{
 \item{webs}{list object obtained from local_web() function.}
@@ -13,9 +13,6 @@ select_mems(webs, landscape, output, ...)
 
 \item{output}{string, where to write output files. Only path and file name,
 with no extension.}
-
-\item{...}{extra arguments d2 (maximum distance for dnear) and style (for
-normalization style of the SWM)}
 }
 \description{
 Select MEMs
