@@ -46,7 +46,7 @@ select_mems <- function(
   r2 <- sel$candidates[order(sel$candidates$R2Adj.select, decreasing = TRUE),
                        c("Pvalue", "R2Adj.select")]
   r2 <- r2[!is.na(r2$R2Adj.select), ]
-  write.csv(r2, paste0(output, "selected-mems.csv"))
+  # write.csv(r2, paste0(output, "selected-mems.csv"))
   # if best is mstree and second best is as good, take second best
   isBestMstree <- grepl("MST", rownames(r2)[1])
   isSecondBestAsGood <- (round(r2$R2Adj.select[1], 2) - round(r2$R2Adj.select[2], 2)) < 1e-2
@@ -69,31 +69,31 @@ select_mems <- function(
                     paste0("1 - x / ", dmax),
                     paste0("1 / (x ^ ", par, ")"),
                     paste0("1 - (x / ", dmax, ") ^ ", par))
-    pdf(paste0(output, "best-swm.pdf"), width = 8, height = 4)
-    lw <- weight_ls(
-      landscape,
-      mode = mode,
-      dist_formula = form,
-      style = style,
-      d2 = d2,
-      plot = TRUE
-    )
-    dev.off()
+    # pdf(paste0(output, "best-swm.pdf"), width = 8, height = 4)
+    # lw <- weight_ls(
+    #   landscape,
+    #   mode = mode,
+    #   dist_formula = form,
+    #   style = style,
+    #   d2 = d2,
+    #   plot = TRUE
+    # )
+    # dev.off()
   }
   # best MEMs summary
-  write.csv(sel$best$summary, paste0(output, "best-swm-summary.csv"))
+  # write.csv(sel$best$summary, paste0(output, "best-swm-summary.csv"))
   # best MEMs table
-  write.csv(sel$best$MEM.select, paste0(output, "best-swm-mems.csv"))
+  # write.csv(sel$best$MEM.select, paste0(output, "best-swm-mems.csv"))
   # plot MEMs spatially
-  pdf(paste0(output, "plot-mems.pdf"), width = 4, height = 4)
-  par(mfrow = c(2, 2))
-  for (i in intersect(1:4, seq_len(ncol(sel$best$MEM.select)))) {
-    s.value(landscape,
-            sel$best$MEM.select[, i],
-            method = "squaresize",
-            pch = 20)
-  }
-  dev.off()
+  # pdf(paste0(output, "plot-mems.pdf"), width = 4, height = 4)
+  # par(mfrow = c(2, 2))
+  # for (i in intersect(1:4, seq_len(ncol(sel$best$MEM.select)))) {
+  #   s.value(landscape,
+  #           sel$best$MEM.select[, i],
+  #           method = "squaresize",
+  #           pch = 20)
+  # }
+  # dev.off()
   # table of MEMs and pagerank centrality
   g <- graph_from_adjacency_matrix(
     nb2mat(cands[[names(sel$best.id)]]$neigh),
@@ -122,7 +122,7 @@ select_mems <- function(
   centr$w.pagerank <- page_rank(g)$vector
   centr$w.subgraph <- subgraph_centrality(g)
   # save to file
-  write.csv(centr, paste0(output, "mems-centralities.csv"))
+  # write.csv(centr, paste0(output, "mems-centralities.csv"))
   return(list(
     mems = sel,
     centrality = centr,
