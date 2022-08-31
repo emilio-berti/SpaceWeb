@@ -19,7 +19,7 @@ weight_ls(
 \item{xy}{landscape matrix.}
 
 \item{mode}{method to construct the spatial network: "dnear", "knear",
-"delauney", "gabriel", "relative".}
+"delauney", "gabriel", "relative", "mstree".}
 
 \item{d1}{minimum distance for dnear.}
 
@@ -39,6 +39,12 @@ a list with
 }
 \description{
 Weighted Landscape
+}
+\details{
+Suggested dist_formulae:
+  - "1 - (x / max(x))"
+  - "1 - (x / max(x))^alpha", alpha in (2, 10)
+  - "1 / x^beta", beta in (1, 10)
 }
 \examples{
 \dontrun{

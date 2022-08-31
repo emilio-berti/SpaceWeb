@@ -48,7 +48,6 @@ local_webs <- function(timeseries, foodweb) {
   }
   props <- lapply(patch, network)
   props <- do.call("rbind", props)
-  props$patch <- seq_len(nrow(props))
   jaccard <- matrix(NA, nrow = length(patch), ncol = length(patch))
   for (i in seq_len(nrow(jaccard))) {
     for (j in seq_len(ncol(jaccard))) {

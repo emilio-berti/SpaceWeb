@@ -1,7 +1,7 @@
 Package: SpaceWeb
 Type: Package
 Title: Spatial Analysis Of Foodwebs Using Moran's Maps
-Version: 0.1.0
+Version: 0.1.1
 Author: Emilio Berti
 Maintainer: Emilio Berti <emilio.berti.academia@gmail.com>
 Description: Analyze spatial patterns of meta-foodwebs using non-trivial 
@@ -15,6 +15,7 @@ RoxygenNote: 7.2.0
 Imports:
   igraph,
   spdep,
+  ade4,
   adespatial,
   testthat
 Suggests:
@@ -22,3 +23,5 @@ Suggests:
     rmarkdown
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)

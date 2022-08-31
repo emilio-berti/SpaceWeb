@@ -1,8 +1,20 @@
+#' @title Default Color Palette
+#'
+#' @param n length of palette.
+#'
+#' @return String vector with colors.
+webpal <- function(n) {
+  cols <- c("#D73027", "#F46D43", "#FDAE61", "#FEE08B", "#FFFFBF",
+            "#D9EF8B", "#A6D96A", "#66BD63", "#1A9850")
+  ans <- colorRampPalette(cols)(n)
+  return (ans)
+}
+
 #' @title Weighted Landscape
 #'
 #' @param xy landscape matrix.
 #' @param mode method to construct the spatial network: "dnear", "knear",
-#'   "delauney", "gabriel", "relative".
+#'   "delauney", "gabriel", "relative", "mstree".
 #' @param d1 minimum distance for dnear.
 #' @param d2 maximum distance for dnear.
 #' @param k number of neighbors for knear.
@@ -12,6 +24,11 @@
 #' @param plot TRUE/FALSE.
 #'
 #' @return a list with
+#'
+#' @details Suggested dist_formulae:
+#'   - "1 - (x / max(x))"
+#'   - "1 - (x / max(x))^alpha", alpha in (2, 10)
+#'   - "1 / x^beta", beta in (1, 10)
 #'
 #' @examples
 #' \dontrun{
@@ -32,17 +49,17 @@ weight_ls <- function(
     plot = FALSE
 ) {
   # some input checks
-  if (!mode %in% c("dnear", "knear", "delauney", "gabriel", "relative")) stop("mode not found")
+  if (!mode %in% c("dnear", "knear", "delauney", "gabriel", "relative", "mstree")) stop("mode not found")
   if (mode == "dnear" & (is.null(d1) | is.null(d2))) stop("dnear: specify d1 and d2")
   if (mode == "knear" & k == 0) stop("knear: specify k")
   nb <- switch(
-    which(c("dnear", "knear", "delauney",
-            "gabriel", "relative", "mstree") == mode),
+    which(c("dnear", "knear", "delauney", "gabriel", "relative", "mstree") == mode),
     dnearneigh(xy, d1, d2),
-    knn2nb(knearneigh(xy, k)),
+    knn2nb(knearneigh(xy, k), sym = TRUE),
     tri2nb(xy),
-    graph2nb(gabrielneigh(xy)),
-    graph2nb(relativeneigh(xy)),
+    graph2nb(gabrielneigh(xy), sym = TRUE),
+    graph2nb(relativeneigh(xy), sym = TRUE),
+    mst.nb(dist(xy))
   )
   # spatial weighting matrix
   dlist <- nbdists(nb, xy)
@@ -71,7 +88,7 @@ weight_ls <- function(
     points(xy, pch = 20, cex = 3, col = "grey20")
     text(xy[, 1], xy[, 2], seq_len(nrow(xy)), col = "gold", cex = 1)
     x <- unlist(dlist)
-    y <- unlist(swm[swm > 0])
+    y <- unlist(lw$weights)
     fit <- loess(y ~ x)
     plot(x, y,
          pch = 20, cex = 1.5,

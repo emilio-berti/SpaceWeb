@@ -2,14 +2,18 @@ exportPattern("^[[:alpha:]]+")
 importFrom("igraph", "graph_from_adjacency_matrix", "V", "V<-", "degree",
            "similarity", "transitivity", "membership", "modularity",
            "average.path.length", "graph.motifs", "cluster_fast_greedy",
-           "as.undirected", "induced_subgraph", "as_adjacency_matrix")
+           "as.undirected", "induced_subgraph", "as_adjacency_matrix",
+           "page_rank", "eigen_centrality", "centr_clo", "centr_betw",
+           "eccentricity", "subgraph_centrality", "centr_degree")
 importFrom("testthat", "with_reporter", "FailReporter", "expect_identical",
            "expect_equal")
 importFrom("spdep", "tri2nb", "dnearneigh", "knearneigh", "knn2nb",
            "gabrielneigh", "graph2nb", "relativeneigh", "nbdists",
-           "nb2listw", "listw2mat")
-importFrom("grDevices", "adjustcolor")
+           "nb2listw", "listw2mat", "nb2mat")
+importFrom("grDevices", "adjustcolor", "colorRampPalette", "dev.off", "pdf")
 importFrom("graphics", "layout", "lines", "par", "plot.new", "points", "text")
-importFrom("stats", "loess", "sd")
+importFrom("stats", "loess", "sd", "dist")
 importFrom("utils", "read.csv", "read.table")
-importFrom("adespatial", "mem")
+importFrom("adespatial", "mst.nb", "listw.candidates", "listw.select", "mem.select")
+importFrom("ade4", "dudi.pca", "s.value", "inertia")
+importFrom("utils", "write.csv")
